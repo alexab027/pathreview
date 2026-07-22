@@ -20,14 +20,12 @@ This issue is narrowly scoped to one method in the RAG evaluation code and has a
 
 ## Week 8 — Reproduction & solution planning
 
-**Reproduction commit link:** [add commit link after pushing]
+**Reproduction commit link:** [[https://github.com/alexab027/pathreview/commit/9942e192ca9c1f8ff2441f0c9b1e1aa42db0faf8]]
 
 **Reproduction summary:**  
 I reproduced the issue by calling `FaithfulnessChecker.check()` with a context chunk containing `{"text": None}`. The method raised a `TypeError` because `None` was passed into `" ".join(...)`.
 
-**PLAN.md link:** [add PLAN.md GitHub link after pushing]
-
-**Walkthrough video (recommended):**
+**PLAN.md link:** [[https://github.com/alexab027/pathreview/blob/fix/153-faithfulness-none-context/PLAN.md]]
 
 **Blockers or open questions:**  
 I am unsure whether the fix should only handle `None` values or also handle other non-string context values.
