@@ -17,3 +17,17 @@ This issue is narrowly scoped to one method in the RAG evaluation code and has a
 **Setup confirmation:** [x] App runs locally at localhost:5173
 
 **Cohort ledger:** [x] Issue added to cohort ledger
+
+## Week 8 — Reproduction & solution planning
+
+**Reproduction commit link:** [add commit link after pushing]
+
+**Reproduction summary:**  
+I reproduced the issue by calling `FaithfulnessChecker.check()` with a context chunk containing `{"text": None}`. The method raised a `TypeError` because `None` was passed into `" ".join(...)`.
+
+**PLAN.md link:** [add PLAN.md GitHub link after pushing]
+
+**Walkthrough video (recommended):**
+
+**Blockers or open questions:**  
+I am unsure whether the fix should only handle `None` values or also handle other non-string context values.
