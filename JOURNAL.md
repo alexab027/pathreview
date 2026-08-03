@@ -20,12 +20,62 @@ This issue is narrowly scoped to one method in the RAG evaluation code and has a
 
 ## Week 8 — Reproduction & solution planning
 
-**Reproduction commit link:** [[https://github.com/alexab027/pathreview/commit/9942e192ca9c1f8ff2441f0c9b1e1aa42db0faf8]]
+**Reproduction commit link:** https://github.com/alexab027/pathreview/commit/9942e192ca9c1f8ff2441f0c9b1e1aa42db0faf8
 
 **Reproduction summary:**  
 I reproduced the issue by calling `FaithfulnessChecker.check()` with a context chunk containing `{"text": None}`. The method raised a `TypeError` because `None` was passed into `" ".join(...)`.
 
-**PLAN.md link:** [[https://github.com/alexab027/pathreview/blob/fix/153-faithfulness-none-context/PLAN.md]]
+**PLAN.md link:** https://github.com/alexab027/pathreview/blob/fix/153-faithfulness-none-context/PLAN.md
 
 **Blockers or open questions:**  
 I am unsure whether the fix should only handle `None` values or also handle other non-string context values.
+
+## Week 9 — Solution building & PR submission
+
+### Check-in 1 (mid-week)
+
+**Current progress:**  
+I reproduced the issue, completed `PLAN.md`, and implemented a fix in `FaithfulnessChecker.check()` so context chunks with `text: None` are treated as empty strings instead of causing a `TypeError`.
+
+I also added a regression test covering a `None` context chunk alongside a valid context chunk.
+
+Before implementation, `make test-unit` reported 53 failing tests and 375 passing tests. The relevant failing test, `test_none_context_chunk_text`, reproduced issue #153.
+
+**Next steps:**  
+Run the full test suite and code quality checks, confirm that no new failures were introduced, open a draft PR, and request peer or mentor feedback.
+
+**Blockers:**  
+The repository has pre-existing unit test, Ruff, and mypy failures unrelated to this issue.
+
+---
+
+### Check-in 2 (end of week)
+
+**PR link:** [add your final PR link]
+
+**Branch:** `fix/153-faithfulness-none-context-pr`
+
+**What you built:**  
+Updated `FaithfulnessChecker.check()` so context chunks with `text: None` are normalized to an empty string before the context text is joined. This prevents the existing `TypeError` while preserving normal behavior for valid context text.
+
+I also added a regression test covering a mix of `None` and valid context chunks.
+
+**Tests added or updated:**  
+Updated `tests/unit/test_faithfulness_checker.py` with a regression test for `None` context text alongside valid context text.
+
+The targeted `test_none_context_chunk_text` test now passes.
+
+Before the fix, the full unit suite reported 375 passing and 53 failing tests. After the fix, it reported 376 passing and 52 failing tests. No new failures were introduced.
+
+The three remaining failures in `tests/unit/test_faithfulness_checker.py` were already present before my change:
+
+- `test_partial_support_returns_middle_score`
+- `test_multiple_context_chunks`
+- `test_multiple_claims_varying_support`
+
+**Self-review confirmation:** [x] make check passes [x] make test-unit passes
+
+Both commands still report documented pre-existing repository failures, but comparison before and after the change confirmed that this contribution introduced no new failures.
+
+**Draft PR feedback received from:**
+none. I requested but did not receive feedback in slack

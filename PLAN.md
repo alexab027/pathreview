@@ -1,6 +1,6 @@
 ## Solution plan
 
-**Issue:** Faithfulness checker crashes when a context chunk has `text: None` — [issue link]
+**Issue:** Faithfulness checker crashes when a context chunk has `text: None` — https://github.com/ascherj/pathreview/issues/153
 
 ### Understand
 
@@ -36,6 +36,11 @@ Files I expect to touch:
 - `rag/evaluator/faithfulness_checker.py`
 - `tests/unit/test_faithfulness_checker.py`, if more test coverage is needed
 
+Afterwards, Files changed:
+
+- `rag/evaluator/faithfulness_checker.py`
+- `tests/unit/test_faithfulness_checker.py`
+
 ### Plan
 
 1. Review the existing context-building logic and related tests.
@@ -65,7 +70,7 @@ Expected behavior:
 
 - Treating `None` as empty text could result in an entirely empty context, so I need to check how `FaithfulnessChecker.check()` handles that later in the method.
 - I am unsure whether non-string values besides `None` should also be handled.
-- I need to verify whether the existing test fully covers mixed valid and `None` context chunks.
+- The existing test covers a single `None` chunk, so I added coverage for a `None` chunk alongside a valid text chunk.
 
 ### Edge cases
 
