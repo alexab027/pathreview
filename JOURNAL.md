@@ -41,8 +41,10 @@ I also added a regression test covering a `None` context chunk alongside a valid
 
 Before implementation, `make test-unit` reported 53 failing tests and 375 passing tests. The relevant failing test, `test_none_context_chunk_text`, reproduced issue #153.
 
+Opened a draft PR and asked for review on slack.
+
 **Next steps:**  
-Run the full test suite and code quality checks, confirm that no new failures were introduced, open a draft PR, and request peer or mentor feedback.
+Run the full test suite and code quality checks, confirm that no new failures were introduced, wait for peer/mentor feedback.
 
 **Blockers:**  
 The repository has pre-existing unit test, Ruff, and mypy failures unrelated to this issue.
@@ -51,7 +53,7 @@ The repository has pre-existing unit test, Ruff, and mypy failures unrelated to 
 
 ### Check-in 2 (end of week)
 
-**PR link:** [add your final PR link]
+**PR link:** https://github.com/ascherj/pathreview/pull/618
 
 **Branch:** `fix/153-faithfulness-none-context-pr`
 
@@ -59,6 +61,8 @@ The repository has pre-existing unit test, Ruff, and mypy failures unrelated to 
 Updated `FaithfulnessChecker.check()` so context chunks with `text: None` are normalized to an empty string before the context text is joined. This prevents the existing `TypeError` while preserving normal behavior for valid context text.
 
 I also added a regression test covering a mix of `None` and valid context chunks.
+
+I had to edit my pr to not include the docs, just the actual fix and submitted!
 
 **Tests added or updated:**  
 Updated `tests/unit/test_faithfulness_checker.py` with a regression test for `None` context text alongside valid context text.
@@ -78,4 +82,4 @@ The three remaining failures in `tests/unit/test_faithfulness_checker.py` were a
 Both commands still report documented pre-existing repository failures, but comparison before and after the change confirmed that this contribution introduced no new failures.
 
 **Draft PR feedback received from:**
-none. I requested but did not receive feedback in slack
+None. I requested but did not receive feedback in slack
