@@ -83,3 +83,40 @@ Both commands still report documented pre-existing repository failures, but comp
 
 **Draft PR feedback received from:**
 None. I requested but did not receive feedback in slack
+
+## Week 10 — Iteration & reflection
+
+### Reviewer feedback
+
+**Feedback received:** [ ] Yes [x] No — still awaiting review
+
+**Summary of feedback:**  
+No reviewer feedback was provided during Summer 2026. I reviewed the open pull request for comments and did not see any maintainer or reviewer feedback to address.
+
+**How you responded:**  
+N/A — no feedback was received.
+
+---
+
+### Reflection
+
+**What was harder than you expected?**  
+The Git and pull request workflow was harder than the code change itself. The actual fix was small, but I had to manage pre-existing test failures, pre-commit hooks, unrelated changes from project setup, a merge conflict after upstream changed the same test file, and separate my CodePath journal commits from the clean contribution branch. I also had to learn how to distinguish failures caused by my work from failures that already existed in the repository.
+
+**What did you learn about working in a large codebase?**  
+I learned that making a small change in someone else’s codebase requires much more than editing one line. I needed to understand the project’s setup process, testing conventions, branch naming rules, commit format, pull request template, and existing code-quality issues. In my own projects, I can change structure or formatting whenever I want. In a shared codebase, keeping the change narrow and making the reviewer’s job easier are important parts of the contribution.
+
+I also learned the value of establishing a baseline before implementation. Running the full unit suite before and after the fix allowed me to show that the suite changed from 375 passing and 53 failing tests to 376 passing and 52 failing tests, with no new failures introduced.
+
+**How did AI tools help — and where did they fall short?**  
+AI tools were most useful for explaining the root cause of the bug, helping me interpret terminal errors, suggesting commands, and helping me organize `PLAN.md`, `JOURNAL.md`, and the pull request description.
+
+AI assistance was less reliable when the exact state of my Git repository mattered. Some suggested steps did not initially account for staged versus unstaged files, pre-commit behavior, merge conflicts, or the fact that my journal commits and contribution commits needed to serve different purposes. I still had to inspect `git status`, read the command output carefully, compare the repository before and after my change, and decide which files actually belonged in the pull request.
+
+**What would you do differently if you started over?**  
+I would create two branches from the beginning: one CodePath tracking branch containing `JOURNAL.md` and `PLAN.md`, and one clean contribution branch containing only the implementation and test changes. That would have prevented the first pull request from including course documentation.
+
+I would also run the baseline checks before modifying any files, record the results immediately, and inspect the pre-commit configuration earlier. Finally, I would avoid running a formatter across an entire existing test file when I only needed to add one small test, because that created unrelated formatting changes in the diff.
+
+**What are you most proud of from this module?**  
+I am most proud that I completed the full open-source contribution process rather than only writing the fix. I reproduced the issue, identified the root cause, wrote a plan, implemented and tested the change, documented pre-existing failures, worked through Git and pre-commit problems, and opened a pull request that another developer could understand and verify.
